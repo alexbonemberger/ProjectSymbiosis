@@ -89,11 +89,14 @@ public class Player : MonoBehaviour
 		}
 		if (velocity.y>0 && animator.GetBool("VelocityYPositive")==false) {
 			animator.SetBool ("VelocityYPositive", true);
-		}
-		if (velocity.y<0 && animator.GetBool("VelocityYPositive")==true) {
+            animator.SetBool("BasicAttack", false);
+            print("up");
+        } else if (velocity.y<0) { // && animator.GetBool("VelocityYPositive")==true) {
 			animator.SetBool ("VelocityYPositive", false);
-			//print ("negativoStart()");
-		}
+            animator.SetBool("BasicAttack", false);
+            print("down");
+            //print ("negativoStart()");
+        }
 		//animation GroundCollision
 		// #info controla a fisica fazendo com que o personagem do jogador tenha metade da velocidade quando aterrisar de um pulo, e so pode pular novamente quando terminar a animacao de aterrisagem;
 		if (animator.GetCurrentAnimatorStateInfo (0).IsName ("GroundCollision")) {
@@ -108,7 +111,7 @@ public class Player : MonoBehaviour
 			animator.SetBool("BasicAttack", false);
 		}
 
-        if (velocity.x < 0.1f && animator.GetCurrentAnimatorStateInfo(0).IsName("RunningShooting"))
+        if (velocity.x > -0.8f && velocity.x < 0.8f && animator.GetCurrentAnimatorStateInfo(0).IsName("RunningShooting"))
             animator.SetBool("BasicAttack", false);
 	}
 
