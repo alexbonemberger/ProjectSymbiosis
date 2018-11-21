@@ -61,13 +61,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\2D Platformer Controller\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\2D Platformer Controller\Scripts\Controller2D.cs" />
-    <Compile Include="Assets\2D Platformer Controller\Scripts\PlatformController.cs" />
-    <Compile Include="Assets\2D Platformer Controller\Scripts\Player.cs" />
-    <Compile Include="Assets\2D Platformer Controller\Scripts\PlayerInput.cs" />
-    <Compile Include="Assets\2D Platformer Controller\Scripts\RaycastController.cs" />
     <Compile Include="Assets\Alex.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\Body.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\Controller2D.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\PlatformController.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\Player.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\2D Platformer Controller\RaycastController.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Unity/ProjectSymbiosis/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
