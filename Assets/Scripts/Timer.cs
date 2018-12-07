@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour {
 
-    private Clock clock;
-    private List<Clock> clocks;
+    private static Clock clock;
+    private static List<Clock> clocks;
 
     // Use this for initialization
     void Awake() {
@@ -20,10 +20,18 @@ public class Timer : MonoBehaviour {
             
             if (clocks[i].startTime <= 0)
             {
-                print(clocks[i].hasEnded);
+                //print(clocks[i].hasEnded);
                 clocks[i].hasEnded = true;
-                print("teste");
-                print(clocks[i].hasEnded);
+                
+                if(clocks[i].hasEnded)
+                {
+                    if (clocks[i].name == "CanShootAgain")
+                    {
+                        MegamanBasicShoot.canShoot = true;
+                        //print("canShootAgain");
+                    }
+                }
+
                 clocks.RemoveAt(i); //remove após executar o código
             }
         }
@@ -32,11 +40,11 @@ public class Timer : MonoBehaviour {
     private class Clock
     {
         public string name;
-        public double startTime;
+        public float startTime;
         public bool hasEnded;
     }
 
-    public void AddClock(string name, double startTime)
+    public static void AddClock(string name, float startTime)
     {
         clock = new Clock
         {

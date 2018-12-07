@@ -12,6 +12,9 @@ public class Body : MonoBehaviour {
     [SerializeField]
     private Timer timer;
     private Animator animator;
+    [SerializeField]
+    private GameObject basicShoot;
+    private GameObject currentShoot;
 
     private float lastAnimationNormalizedTimeAtExit;
     private float lastAnimationNormalizedTime;
@@ -27,10 +30,13 @@ public class Body : MonoBehaviour {
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && MegamanBasicShoot.canShoot)
         {
-            BasicAttack();
-            timer.AddClock("Relogio", 3f);
+            if (MegamanBasicShoot.Count < 3)
+            {
+                SetBasicAttackTrue();
+                BasicAttack();
+            }
         }
 
         AnimationCode();
@@ -38,27 +44,7 @@ public class Body : MonoBehaviour {
 
     private void AnimationCode()
     {
-        //animation change code starts
-        if (lastAnimationId != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
-        {
-            lastAnimationId = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-            //print("nova animacao");
-            
-
-            //guarda o tempo normalizado que a última animação estava quando saiu
-            lastAnimationNormalizedTimeAtExit = lastAnimationNormalizedTime;
-            //print(lastAnimationNormalizedTimeAtExit);
-
-            //normalizedTimeTransfer
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("JumpingShooting"))
-            {
-                animator.Play(0, 0, lastAnimationNormalizedTimeAtExit * 1.1f); // axb check
-                print(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-            }
-        }
-        lastAnimationNormalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        //animation change code ends
-
+        OnAnimationTransition();
         //bool changing
 
         if (controller.collisions.below == true && animator.GetBool("Grounded") == false)
@@ -73,13 +59,13 @@ public class Body : MonoBehaviour {
         {
             animator.SetBool("VelocityYPositive", true);
             animator.SetBool("BasicAttack", false);
-            print("up");
+            //print("up");
         }
         else if (player.velocity.y <= 0 && animator.GetBool("VelocityYPositive") == true)
         {
             animator.SetBool("VelocityYPositive", false);
             animator.SetBool("BasicAttack", false);
-            print("down");
+            //print("down");
             //print ("negativoStart()");
         }
 
@@ -102,19 +88,71 @@ public class Body : MonoBehaviour {
         }
     }
 
-    private void BasicAttack()
+    private void SetBasicAttackTrue()
     {
         animator.SetBool("BasicAttack", true);
     }
 
+    private void BasicAttack()
+    {
+        currentShoot = Instantiate(basicShoot, transform.position, Quaternion.identity);
+        if (controller.directionLookRight)
+        {
+            currentShoot.transform.localPosition += new Vector3(0.33f, 0.12f, 0);
+            currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(8, 0);
+
+        }
+        else
+        {
+            currentShoot.transform.localPosition += new Vector3(-0.33f, 0.12f, 0);
+            currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(-8, 0);
+        }
+    }
+
     public void AnimationShootingEnds()
     {
-        print("End");
+        //print("End");
         animator.SetBool("BasicAttack", false);
     }
 
     public void AnimationRunningShootingEnds()
     {
-        print("REnd");
+        //print("REnd");
+    }
+
+    private void OnAnimationTransition()
+    {
+        //animation change code starts
+        if (lastAnimationId != animator.GetCurrentAnimatorStateInfo(0).fullPathHash)
+        {
+            lastAnimationId = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+            //print("nova animacao");
+
+
+            //guarda o tempo normalizado que a última animação estava quando saiu
+            lastAnimationNormalizedTimeAtExit = lastAnimationNormalizedTime;
+            //print(lastAnimationNormalizedTimeAtExit);
+
+
+            //condition of animation change star
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("JumpingShooting")) //normalizedTimeTransfer
+            {
+                animator.Play(0, 0, lastAnimationNormalizedTimeAtExit * 1.1f); // animation transition at time defined
+                //BasicAttack();
+            }
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("FallingShooting"))
+            {
+                //BasicAttack();
+            }
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("RunningShooting"))
+            {
+                //BasicAttack();
+            }
+            //conditions of animation change end
+        }
+        lastAnimationNormalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        //animation change code ends
     }
 }

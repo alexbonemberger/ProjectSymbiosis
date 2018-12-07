@@ -7,7 +7,7 @@ public class Controller2D : RaycastController
     private float maxDescendAngle = 80f;
 
 	//added
-	private bool directionLookRight = true;
+	public bool directionLookRight = true;
 	private SpriteRenderer mySpriteRenderer;
 
     public CollisionInfo collisions;
