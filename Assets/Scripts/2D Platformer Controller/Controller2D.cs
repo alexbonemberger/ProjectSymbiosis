@@ -9,6 +9,8 @@ public class Controller2D : RaycastController
 	//added
 	public bool directionLookRight = true;
 	private SpriteRenderer mySpriteRenderer;
+    [SerializeField]
+    private SpriteRenderer SpriteRendererShootModeUpBody;
 
     public CollisionInfo collisions;
     [HideInInspector]
@@ -37,15 +39,7 @@ public class Controller2D : RaycastController
 
 		if (moveAmount.x != 0)
         {
-            collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
-			if ((collisions.faceDir == -1) && (directionLookRight == true)) {
-				directionLookRight = false;
-				mySpriteRenderer.flipX = true;
-			}
-			if ((collisions.faceDir == 1) && (directionLookRight == false)) {
-				directionLookRight = true;
-				mySpriteRenderer.flipX = false;
-			}
+            ChangeFaceDir(moveAmount.x);
         }
 
         if (moveAmount.y < 0)
@@ -65,6 +59,23 @@ public class Controller2D : RaycastController
         if (standingOnPlatform)
         {
             collisions.below = true;
+        }
+    }
+
+    public void ChangeFaceDir(float moveAmountX)
+    {
+        collisions.faceDir = (int)Mathf.Sign(moveAmountX);
+        if ((collisions.faceDir == -1) && (directionLookRight == true))
+        {
+            directionLookRight = false;
+            mySpriteRenderer.flipX = true;
+            SpriteRendererShootModeUpBody.flipX = true;
+        }
+        if ((collisions.faceDir == 1) && (directionLookRight == false))
+        {
+            directionLookRight = true;
+            mySpriteRenderer.flipX = false;
+            SpriteRendererShootModeUpBody.flipX = false;
         }
     }
 

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\2D Platformer Controller\Player.cs" />
     <Compile Include="Assets\Scripts\2D Platformer Controller\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\2D Platformer Controller\RaycastController.cs" />
+    <Compile Include="Assets\Scripts\MasterScript.cs" />
     <Compile Include="Assets\Scripts\MegamanBasicShoot.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Reference Include="UnityEditor.StandardEvents">

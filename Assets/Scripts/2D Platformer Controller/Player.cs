@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
 	//added
 	public bool canJump = true;
+    public bool canMove = true;
 
     private Animator animator;
 
@@ -49,14 +50,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        CalculateVelocity();
-        HandleWallSliding();
-
-        controller.Move(velocity * Time.deltaTime, directionalInput);
-
-        if (controller.collisions.above || controller.collisions.below)
+        if (canMove) // pode se mover
         {
-            velocity.y = 0f;
+            CalculateVelocity();
+            HandleWallSliding();
+
+            controller.Move(velocity * Time.deltaTime, directionalInput);
+
+            if (controller.collisions.above || controller.collisions.below)
+            {
+                velocity.y = 0f;
+            }
         }
     }
 
