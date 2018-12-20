@@ -31,7 +31,7 @@ public class MegamanBasicShoot : MonoBehaviour {
         //if (canShoot == false) Timer.AddClock("CanShootAgain", 2f);
     }
 
-    private void ReverseOverHeat()
+    public static void ReverseOverHeat()
     {
         if(Time.time - lastShootTime > 1f)
         {
@@ -47,7 +47,7 @@ public class MegamanBasicShoot : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Enemy")
         {
             //print(collision.gameObject.name);
             Destroy(gameObject);

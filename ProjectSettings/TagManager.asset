@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Through
-  - Shoot
+  - PlayerAttack
+  - EnemyAttack
+  - Enemy
+  - MasterGameObject
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         clocks = new List<Clock>();
-        //Time.timeScale = 0.25f;
+        //Time.timeScale = 0.1f;
     }
 
     void Update() {
@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour {
                 {
                     if (clocks[i].name == "CanShootAgain")
                     {
-                        MegamanBasicShoot.canShoot = true;
+                        MegamanBasicShoot.ReverseOverHeat();
                         //print("canShootAgain");
                     }
                 }
@@ -46,13 +46,16 @@ public class Timer : MonoBehaviour {
 
     public static void AddClock(string name, float startTime)
     {
-        clock = new Clock
+        if (!clocks.Contains(clocks.Find(L => L.name == name))) //impede a duplicação do timer
         {
-            name = name,
-            startTime = startTime,
-            hasEnded = false
-        };
-        clocks.Add(clock);
+            clock = new Clock
+            {
+                name = name,
+                startTime = startTime,
+                hasEnded = false
+            };
+            clocks.Add(clock);
+        }
     }
 
     public void RemoveClock(string name)

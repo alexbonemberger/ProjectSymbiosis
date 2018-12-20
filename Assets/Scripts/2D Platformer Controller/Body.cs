@@ -46,7 +46,7 @@ public class Body : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Mouse0) && MegamanBasicShoot.canShoot)
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0)) && MegamanBasicShoot.canShoot)
         {
             if (MegamanBasicShoot.Count < 3)
             {
@@ -55,7 +55,7 @@ public class Body : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (animator.GetBool("ShootModeActive"))
             {
@@ -74,10 +74,19 @@ public class Body : MonoBehaviour {
                 MySprite_ShootModeUpBody.SetActive(true);
                 mousePositionStart = Input.mousePosition;
                 MySprite_ShootModeUpBody.transform.localPosition = MySprite_ShootModeUpBodyLocalPositionStart;
+                if (controller.directionLookRight)
+                {
+                    MySprite_ShootModeUpBody.transform.localPosition = new Vector3(-0.2f, 0.44f, 0);
+                    shootModeDirection = 1f;
+                }
+                else
+                {
+                    MySprite_ShootModeUpBody.transform.localPosition = new Vector3(0.2f, 0.44f, 0);
+                    shootModeDirection = -1f;
+                }
                 player.canMove = false;
             }
         }
-
         ShootMode();
         AnimationCode();
     }
@@ -138,6 +147,7 @@ public class Body : MonoBehaviour {
             {
                 currentShoot.transform.localPosition += new Vector3((90f - Mathf.Abs(degrees)) * 0.33f / 90 - Mathf.Abs(degrees) * 0.06f / 90 + ((45 - Mathf.Abs(degrees -45)) * 0.033f / 45), degrees * 0.33f / 90 + 0.14f + ((45 - Mathf.Abs(degrees - 45)) * 0.033f / 45), 0);
                 currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(8 * (90 - Mathf.Abs(degrees)) / 90, 8 * degrees / 90);
+                print(currentShoot.transform.localPosition);
             }
             else
             {
@@ -150,8 +160,9 @@ public class Body : MonoBehaviour {
         {
             if (animator.GetBool("ShootModeActive"))
             {
-                currentShoot.transform.localPosition += new Vector3(-(90f - Mathf.Abs(degrees)) * 0.33f / 90 - Mathf.Abs(degrees) * 0.06f / 90 + ((45 - Mathf.Abs(degrees - 45)) * 0.033f / 45), degrees * 0.33f / 90 + 0.14f + ((45 - Mathf.Abs(degrees - 45)) * 0.033f / 45), 0);
+                currentShoot.transform.localPosition += new Vector3(-((90f - Mathf.Abs(degrees)) * 0.33f / 90 - Mathf.Abs(degrees) * 0.06f / 90 + ((45 - Mathf.Abs(degrees - 45)) * 0.033f / 45)), degrees * 0.33f / 90 + 0.14f + ((45 - Mathf.Abs(degrees - 45)) * 0.033f / 45), 0);
                 currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(-8 * (90 - Mathf.Abs(degrees)) / 90, 8 * degrees / 90);
+                print(currentShoot.transform.localPosition);
             }
             else
             {
@@ -181,26 +192,21 @@ public class Body : MonoBehaviour {
             degrees /= sensibilityMultiplier; // sensibility
             textAimDegrees.text = degrees.ToString("n2");
 
-            //process result
-            if (controller.directionLookRight) // flip the animation of upper body part
-            {
-                shootModeDirection = 1f;
-            }
-            else
-            {
-                shootModeDirection = -1f;
-            }
+            //animation ajust
             MySprite_ShootModeUpBody.transform.eulerAngles = new Vector3(0, 0, shootModeDirection * degrees);
-            MySprite_ShootModeUpBody.transform.localPosition = new Vector3(MySprite_ShootModeUpBodyLocalPositionStart.x + Mathf.Abs(degrees) * -0.3f / 90, MySprite_ShootModeUpBodyLocalPositionStart.y + Mathf.Abs(degrees) * 0.06f / 90, 0); // smoth inclination
 
             //flip x when in shootmode
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
                 controller.ChangeFaceDir(-1);
+                shootModeDirection = -1f;
+                MySprite_ShootModeUpBody.transform.localPosition = new Vector3(-1 * shootModeDirection * 0.2f, 0.44f, 0);
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) //com else testa apenas um if, pois essa funcao eh chamada no update
             {
                 controller.ChangeFaceDir(1);
+                shootModeDirection = 1f;
+                MySprite_ShootModeUpBody.transform.localPosition = new Vector3(-1 * shootModeDirection * 0.2f, 0.44f, 0);
             }
         }
     }

@@ -69,8 +69,12 @@
     <Compile Include="Assets\Scripts\2D Platformer Controller\Player.cs" />
     <Compile Include="Assets\Scripts\2D Platformer Controller\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\2D Platformer Controller\RaycastController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyBat.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\MasterScript.cs" />
     <Compile Include="Assets\Scripts\MegamanBasicShoot.cs" />
+    <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Unity/ProjectSymbiosis/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
