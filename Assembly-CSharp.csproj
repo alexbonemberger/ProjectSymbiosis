@@ -69,12 +69,20 @@
     <Compile Include="Assets\Scripts\2D Platformer Controller\Player.cs" />
     <Compile Include="Assets\Scripts\2D Platformer Controller\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\2D Platformer Controller\RaycastController.cs" />
+    <Compile Include="Assets\Scripts\Blake\Evoker.cs" />
+    <Compile Include="Assets\Scripts\Blake\EvokerStats.cs" />
+    <Compile Include="Assets\Scripts\Blake\EvokerStatsData.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyBat.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyStats.cs" />
+    <Compile Include="Assets\Scripts\Knowledge\Knowledge.cs" />
+    <Compile Include="Assets\Scripts\Knowledge\KnowledgeData.cs" />
     <Compile Include="Assets\Scripts\MasterScript.cs" />
     <Compile Include="Assets\Scripts\MegamanBasicShoot.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Save\GenericData.cs" />
+    <Compile Include="Assets\Scripts\Save\PlayerStatsData.cs" />
+    <Compile Include="Assets\Scripts\Save\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Unity/ProjectSymbiosis/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

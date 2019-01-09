@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    private int level;
+    public int level;
     private int progressionLevel;
     private float progression;
     public float health;
@@ -35,9 +35,19 @@ public class PlayerStats : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        level = 0;
-        gold = 0;
-        exp = 0;
+        PlayerStatsData dataToLoad = SaveSystem.LoadPlayerStats();
+        if (dataToLoad != null)
+        {
+            level = dataToLoad.level;
+            gold = dataToLoad.gold;
+            exp = dataToLoad.exp;
+        }
+        else
+        {
+            level = 0;
+            gold = 0;
+            exp = 0;
+        } // load completed
         progressionLevel = 0;
         progression = Mathf.Pow(2f, (level / 100)) * (level / 100f - level / 100 + 1); //each rank doubles the power of last rank and add 1 percent per level in the rank
         health = progression * (470f + progressionLevel * 75f);
@@ -66,8 +76,11 @@ public class PlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SaveSystem.SavePlayerStats(this);
+        }
+    }
 
     public void IncreaseGold(float gold)
     {

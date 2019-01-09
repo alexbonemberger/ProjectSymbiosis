@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Timer : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class Timer : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         clocks = new List<Clock>();
-        //Time.timeScale = 0.1f;
+        //Time.timeScale = 0.5f;
     }
 
     void Update() {

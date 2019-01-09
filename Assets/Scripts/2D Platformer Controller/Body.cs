@@ -151,8 +151,16 @@ public class Body : MonoBehaviour {
             }
             else
             {
-                currentShoot.transform.localPosition += new Vector3(0.33f, 0.12f, 0);
-                currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(8, 0);
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("SlidingShooting") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Sliding"))
+                {
+                    currentShoot.transform.localPosition += new Vector3(0.33f, 0.12f, 0);
+                    currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(8, 0);
+                }
+                else
+                {
+                    currentShoot.transform.localPosition += new Vector3(-0.33f, 0.12f, 0);
+                    currentShoot.GetComponent<Rigidbody2D>().velocity -= new Vector2(8, 0);
+                }
             }
 
         }
@@ -166,8 +174,16 @@ public class Body : MonoBehaviour {
             }
             else
             {
-                currentShoot.transform.localPosition += new Vector3(-0.33f, 0.12f, 0);
-                currentShoot.GetComponent<Rigidbody2D>().velocity -= new Vector2(8, 0);
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("SlidingShooting") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Sliding"))
+                {
+                    currentShoot.transform.localPosition += new Vector3(-0.33f, 0.12f, 0);
+                    currentShoot.GetComponent<Rigidbody2D>().velocity -= new Vector2(8, 0);
+                }
+                else
+                {
+                    currentShoot.transform.localPosition += new Vector3(0.33f, 0.12f, 0);
+                    currentShoot.GetComponent<Rigidbody2D>().velocity += new Vector2(8, 0);
+                }
             }
         }
     }

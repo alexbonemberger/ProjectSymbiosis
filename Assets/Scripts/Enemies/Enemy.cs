@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour {
     void Awake () {
         playerStats = GameObject.FindGameObjectWithTag("MasterGameObject").GetComponent<PlayerStats>();
         progression = Mathf.Pow(2f, (level / 100)) * (level / 100f - level / 100 + 1); //each rank doubles the power of last rank and add 1 percent per level in the rank
-        print(progression);
+        //print(progression);
 
         //status from EnemyStats
         //load
